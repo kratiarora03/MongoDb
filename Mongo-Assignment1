@@ -1,0 +1,136 @@
+NSDB Assignment-1 
+
+Krati21csu361
+1)
+db.Employee.updateMany({Desg:'CLERK'},{$set:{Desg:'Administrative Officer'}})
+
+2)
+db.Employee.updateMany(
+...   {  },
+...   { $set: { "project.$[].Hrs": 7 } }
+... );
+
+3)
+db.Employee.updateOne( {emono:111}, {$push:{ project:{$each:[
+... {name:"Project 3", Hrs:8},
+... {name:"Project 4",Hrs:6}
+... ]}
+... }
+... }
+... );
+5)
+db.Employee.updateMany(
+...    { "mgr.name": "satish" },
+...    { $set: { "mgr.name": "Tushar", "mgr.num": 3333 } }
+... )
+
+6)
+db.Employee.updateMany(
+... {"dept.dname":"Purchase department"},
+... {$inc:{ salary:15000}})
+
+7)
+db.Employee.updateMany(
+...    { "project.name": "project-2" },
+...    { $inc: { "project.$.Hrs": -2 } }
+... )
+
+8)
+db.Employee.deleteMany(
+... {"project.name":"project-2"},
+... {if :{"project.$.Hrs":4}})
+
+9)
+db.Employee.updateMany({ salary :{$gt:10000}},
+... {$set:{salary:10000}})
+
+10)
+db.Employee.updateMany( { $or:[
+... {bonus : {$lt : 2000} },
+... {salary : {$lt : 20000} },
+... {"dept.dname":"sales"}
+... ]
+... },
+... {$inc: {bonus:500}}
+... )
+
+11)
+db.Employee.updateMany(
+...   {
+...     $or: [
+...       { desg: "analyst" },
+...       { salary: { $in: [30000, 33000, 35000] } }
+...     ]
+...   },
+...   {
+...     $push: {
+...       project: { $each: ["project5", "project6"] }
+...     }
+...   }
+... )
+
+12)
+ db.Employee.updateMany({
+... "dept.dname":"Hr","dept.dloc":"Mumbai"},
+... {$pop:{projects:1}}
+... )
+
+13)
+db.Employee.updateMany({
+... "project.name":"project-1","project.hrs":4},
+... {$set:{desg:"senior programmer"}})
+
+14)
+db.Employee.updateMany(
+... {$or:
+... [{mgr:"Rajan"},
+... {mgr:"Revati"}]},
+... {$set:{hobbies:["hobby1","hobby2"]}})
+
+15)
+db.Employee.updateMany(
+... {$or:
+... [{"project.name":"project-4" , "project.hrs":3},
+... {"project.name":"project-3" , "project.hrs":4}]}
+... ,
+... {$set:{skillset:["skill1","skill2"]}})
+
+16)
+
+
+17)
+db.Employee.updateMany( {$or:[{"project.name":"project-2"}, {"project.name":"project-3"}]},
+... {$inc: {sal:10000}})
+
+18)
+db.Employee.deleteMany({ "project.name": "project-1" })
+
+19)
+db.Employee.replaceOne({ ename: "Deepak" }, { ename: "New doc", salary: 10000, desg: "Developer" })
+
+20)
+ db.Employee.updateMany({
+... skill:"python"},
+... {$set:{skill:"python 3.8"}})
+
+21)
+db.Employee.updateMany({
+... "dept.dloc":"pune"},
+... {$push:{skillset:{$each:["mongodb","perl"]}}})
+
+22)
+ db.Employee.deleteMany({
+... $or:[
+... {"project.name":"project-1"},
+... {"project.name":"project-2"}],
+... hobby:"hobby-1",
+... position:1});
+
+23)
+db.Employee.deleteMany( {"project.name":"project-2","project.hrs":4}, {hobby:"hobby-2"});
+
+24)
+db.Employee.updateMany({ $or:[ {skillset:"perl"},{skillset:"python"}]}, {$push:{project:{$each:[{name:"Project-Q",Hrs:3},{name:"Project-R",Hrs:2}]}}});
+
+25)
+db.Employee.updateMany({ "project.name":"project-1","project.hrs":{$lt:6}}, {$set:{"project.$.hrs":6}});
